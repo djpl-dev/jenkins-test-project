@@ -4,16 +4,12 @@ pipeline {
         PROJECT = "leaf"
     }
 
- 
-
     stages {
         stage('checkout') { 
             steps {
                 checkout scm 
             } 
         }
- 
-
         stage('test') {
             steps {
                 script {
@@ -22,9 +18,6 @@ pipeline {
                 }
             }
         }
-
- 
-
-    }
+   }
 }
 
