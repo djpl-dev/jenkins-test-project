@@ -16,6 +16,8 @@ pipeline {
                     println("Hello world!")
 			        println "Branch name: ${BRANCH_NAME}"
                     println "This is build #${BUILD_NUMBER}"
+                    println "URL for Jenkins: ${JENKINS_URL}"
+                    println "URL for this Job: ${JOB_URL}"
                 }
             }
         }
