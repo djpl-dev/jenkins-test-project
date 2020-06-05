@@ -13,9 +13,9 @@ pipeline {
         stage('test') {
             steps {
                 script {
-                    println("hello world")
-			        println "${BRANCH_NAME}"
-                    println "${BUILD_NUMBER}"
+                    println("Hello world!")
+			        println "Branch name: ${BRANCH_NAME}"
+                    println "This is build #${BUILD_NUMBER}"
                 }
             }
         }
