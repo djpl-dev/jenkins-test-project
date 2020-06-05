@@ -12,6 +12,7 @@ pipeline {
         }
         stage('test') {
             steps {
+                DisplayName()
                 script {
                     println("Hello world!")
 			        println "Branch name: ${BRANCH_NAME}"
@@ -20,7 +21,7 @@ pipeline {
                     //println "URL for this Job: ${JOB_URL}"
                     
                 }
-                DisplayName()
+                
             }
         }
 	stage('Example Deploy') {
@@ -46,3 +47,4 @@ pipeline {
             DisplayName();
         } 
     }
+    
