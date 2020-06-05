@@ -18,8 +18,9 @@ pipeline {
                     println "This is build #${BUILD_NUMBER}"
                     println "URL for Jenkins: ${JENKINS_URL}"
                     //println "URL for this Job: ${JOB_URL}"
-                    DisplayName()
+                    
                 }
+                DisplayName()
             }
         }
 	stage('Example Deploy') {
