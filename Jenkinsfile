@@ -4,6 +4,18 @@ pipeline {
         PROJECT = "leaf"
     }
 
+    // simple groovy method
+    class Example {
+        static def DisplayName() {
+            println("This is how methods work in groovy");
+            println("This is an example of a simple method");
+        } 
+            
+        static void main(String[] args) {
+            DisplayName();
+        } 
+    }
+
     stages {
         stage('checkout') { 
             steps {
@@ -18,6 +30,7 @@ pipeline {
                     println "This is build #${BUILD_NUMBER}"
                     println "URL for Jenkins: ${JENKINS_URL}"
                     //println "URL for this Job: ${JOB_URL}"
+                    DisplayName();
                 }
             }
         }
