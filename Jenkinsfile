@@ -14,13 +14,15 @@ pipeline {
             steps {
                 script {
                     println("hello world")
-			println "${BRANCH_NAME}"
+			        println "${BRANCH_NAME}"
+                    
                 }
             }
         }
 	stage('Example Deploy') {
             when {
                 branch 'production'
+                println "${BUILD_NUMBER}"
             }
             steps {
                 echo 'Deploying'
