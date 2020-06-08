@@ -12,7 +12,7 @@ pipeline {
         }
         stage('test') {
             steps {
-                DisplayName()
+                //DisplayName()
                 script {
                     println("Hello world!")
 			        println "Branch name: ${BRANCH_NAME}"
