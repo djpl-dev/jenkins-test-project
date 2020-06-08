@@ -35,7 +35,7 @@ pipeline {
         }
    }
 }
-
+/*
 // simple groovy method
     class Example {
         static def DisplayName() {
@@ -46,5 +46,5 @@ pipeline {
         static void main(String[] args) {
             DisplayName();
         } 
-    }
+    } */
     
