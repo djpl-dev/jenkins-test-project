@@ -35,9 +35,6 @@ def afterSprintEndDate = LocalDate.of(2020,07,01)
 println ("Sprint's end date: ${sprintEndDate}")
 println ("Date before the end of the sprint: ${beforeSprintEndDate}")
 println ("Date after the end of the sprint: ${afterSprintEndDate}")
-
-def daysRemaining = sprintEndDate - now
-println ("Days remaining until end of sprint: ${daysRemaining}")
                     
                 }
                 
