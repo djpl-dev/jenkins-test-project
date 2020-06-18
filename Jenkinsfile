@@ -19,6 +19,21 @@ pipeline {
                     println "This is build #${BUILD_NUMBER}"
                     println "URL for Jenkins: ${JENKINS_URL}"
                     //println "URL for this Job: ${JOB_URL}"
+		
+		// Sprint Script:
+		def now = LocalDate.now()
+println ("Today's date: ${now}")
+
+def sprintEndDate = LocalDate.of(2020,06,30)
+def beforeSprintEndDate = LocalDate.of(2020,06,29)
+def afterSprintEndDate = LocalDate.of(2020,07,01)
+
+println ("Sprint's end date: ${sprintEndDate}")
+println ("Date before the end of the sprint: ${beforeSprintEndDate}")
+println ("Date after the end of the sprint: ${afterSprintEndDate}")
+
+def daysRemaining = sprintEndDate - now
+println ("Days remaining until end of sprint: ${daysRemaining}")
                     
                 }
                 
