@@ -1,3 +1,5 @@
+import java.time.*
+
 pipeline {
     agent any
     environment {
@@ -22,8 +24,6 @@ pipeline {
 		
 		// Sprint Script:
 println ("Hello from Groovy!")
-
-import java.time.*
 
 		def now = LocalDate.now()
 println ("Today's date: ${now}")
