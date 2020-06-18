@@ -21,6 +21,10 @@ pipeline {
                     //println "URL for this Job: ${JOB_URL}"
 		
 		// Sprint Script:
+println ("Hello from Groovy!")
+
+import java.time.*
+
 		def now = LocalDate.now()
 println ("Today's date: ${now}")
 
