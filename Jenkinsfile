@@ -37,8 +37,9 @@ println ("Sprint's end date: ${sprintEndDate}")
 println ("Date before the end of the sprint: ${beforeSprintEndDate}")
 println ("Date after the end of the sprint: ${afterSprintEndDate}")
 */
-// Beginning of script
-Sprint {
+// Beginning of script from sprintMethod.groovy in /IdeaProject/GroovyProject2
+// Syntax modified to run on Jenkins pipeline
+public class Sprint {
     // variables
     def dateNow = LocalDate.now();
     def weekday = LocalDate.parse("${dateNow}").getDayOfWeek();
@@ -50,7 +51,7 @@ Sprint {
     def afterSprintEndDate = LocalDate.of(2020, 07, 01)
 
     // method for today's date
-    void todayDate() { // dynamic
+    public static void todayDate() { // dynamic
         println("Today's date: ${dateNow}")
         println("Today is: ${weekday}")
         println("The month is: ${monthName}")
@@ -60,7 +61,7 @@ Sprint {
     }
 
     // method for sprint date
-    void sprintDate() {
+    public static void sprintDate() {
         println("Sprint's end date: ${sprintEndDate}")
         println("Date before the end of the sprint: ${beforeSprintEndDate}")
         println("Date after the end of the sprint: ${afterSprintEndDate}")
