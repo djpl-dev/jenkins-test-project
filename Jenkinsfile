@@ -23,9 +23,10 @@ pipeline {
                     //println "URL for this Job: ${JOB_URL}"
 		
 		// Sprint Script:
+/*
 println ("Hello from Groovy!")
 
-		def now = LocalDate.now()
+def now = LocalDate.now()
 println ("Today's date: ${now}")
 
 def sprintEndDate = LocalDate.of(2020,06,30)
@@ -35,7 +36,48 @@ def afterSprintEndDate = LocalDate.of(2020,07,01)
 println ("Sprint's end date: ${sprintEndDate}")
 println ("Date before the end of the sprint: ${beforeSprintEndDate}")
 println ("Date after the end of the sprint: ${afterSprintEndDate}")
-                    
+*/
+
+class Sprint {
+    // variables
+    def dateNow = LocalDate.now();
+    def weekday = LocalDate.parse("${dateNow}").getDayOfWeek();
+    def monthName = LocalDate.parse("${dateNow}").getMonth();
+    int monthDay = LocalDate.parse("${dateNow}").getDayOfMonth();
+    int year = LocalDate.parse("${dateNow}").getYear();
+    def sprintEndDate = LocalDate.of(2020, 06, 30)
+    def beforeSprintEndDate = LocalDate.of(2020, 06, 29)
+    def afterSprintEndDate = LocalDate.of(2020, 07, 01)
+
+    // method for today's date
+    void todayDate() { // dynamic
+        println("Today's date: ${dateNow}")
+        println("Today is: ${weekday}")
+        println("The month is: ${monthName}")
+        println("The day of the month is: ${monthDay}")
+        println("The year is: ${year}")
+        println("Today is ${weekday}, ${monthName} ${monthDay}, ${year}")
+    }
+
+    // method for sprint date
+    void sprintDate() {
+        println("Sprint's end date: ${sprintEndDate}")
+        println("Date before the end of the sprint: ${beforeSprintEndDate}")
+        println("Date after the end of the sprint: ${afterSprintEndDate}")
+
+        // This method cannot be run on Jenkins. May need to be more specific.
+        def daysRemaining = sprintEndDate - dateNow
+        println("Days remaining until end of sprint: ${daysRemaining}")
+    }
+
+}
+
+// New instance of Sprint
+Sprint s = new Sprint()
+// Calling the new instances
+s.todayDate()
+s.sprintDate()
+// end of script
                 }
                 
             }
