@@ -37,8 +37,8 @@ println ("Sprint's end date: ${sprintEndDate}")
 println ("Date before the end of the sprint: ${beforeSprintEndDate}")
 println ("Date after the end of the sprint: ${afterSprintEndDate}")
 */
-
-class Sprint {
+// Beginning of script
+Sprint {
     // variables
     def dateNow = LocalDate.now();
     def weekday = LocalDate.parse("${dateNow}").getDayOfWeek();
