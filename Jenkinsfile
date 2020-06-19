@@ -37,6 +37,7 @@ println ("Sprint's end date: ${sprintEndDate}")
 println ("Date before the end of the sprint: ${beforeSprintEndDate}")
 println ("Date after the end of the sprint: ${afterSprintEndDate}")
 */
+
 // Beginning of script from sprintMethod.groovy in /IdeaProject/GroovyProject2
 // Syntax modified to run on Jenkins pipeline
 Sprint {
@@ -74,7 +75,7 @@ Sprint {
 }
 
 // New instance of Sprint
-Sprint s = new Sprint()
+Sprint = s
 // Calling the new instances
 s.todayDate()
 s.sprintDate()
