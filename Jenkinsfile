@@ -23,62 +23,36 @@ pipeline {
                     //println "URL for this Job: ${JOB_URL}"
 		
 		// Sprint Script:
-/*
-println ("Hello from Groovy!")
+        def buildPrefix = "BLD"
+        def buildSuffix = "XX"
 
-def now = LocalDate.now()
-println ("Today's date: ${now}")
+        // Captures week number of the year
+        int weekOfYear = ofDate.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR)
+        // last day of sprint are always on Tuesdays
+        def lastDayOfSprint = ofDate.with(DayOfWeek.TUESDAY)
 
-def sprintEndDate = LocalDate.of(2020,06,30)
-def beforeSprintEndDate = LocalDate.of(2020,06,29)
-def afterSprintEndDate = LocalDate.of(2020,07,01)
+        // if week is ODD
+        if(weekOfYear % 2 != 0) {
+            // if day of the week is after Tuesday
+            if(ofDate.getDayOfWeek().getValue() > 2) {
+                // adds two weeks to the odd week to land the last sprint day on a tuesday
+                lastDayOfSprint = lastDayOfSprint.plus(14, ChronoUnit.DAYS).with(DayOfWeek.TUESDAY)
+            }
+            // if day of the week is on or before Tuesday
+            else { // if(ofDate.getDayOfWeek().getValue() <= 2)
+                // last day of sprint is in the week of the date
+                lastDayOfSprint = ofDate.with(DayOfWeek.TUESDAY)
+            }
+        }
+        // if week is EVEN
+        else { // if(weekOfYear % 2 == 0)
+            // adds a week to the even week to land the last sprint day on a tuesday in the following odd week
+            lastDayOfSprint = lastDayOfSprint.plus(7, ChronoUnit.DAYS).with(DayOfWeek.TUESDAY)
+        }
 
-println ("Sprint's end date: ${sprintEndDate}")
-println ("Date before the end of the sprint: ${beforeSprintEndDate}")
-println ("Date after the end of the sprint: ${afterSprintEndDate}")
-*/
-
-// Beginning of script from sprintMethod.groovy in /IdeaProject/GroovyProject2
-// Syntax modified to run on Jenkins pipeline
-Sprint {
-    // variables
-    def dateNow = LocalDate.now();
-    def weekday = LocalDate.parse("${dateNow}").getDayOfWeek();
-    def monthName = LocalDate.parse("${dateNow}").getMonth();
-    int monthDay = LocalDate.parse("${dateNow}").getDayOfMonth();
-    int year = LocalDate.parse("${dateNow}").getYear();
-    def sprintEndDate = LocalDate.of(2020, 06, 30)
-    def beforeSprintEndDate = LocalDate.of(2020, 06, 29)
-    def afterSprintEndDate = LocalDate.of(2020, 07, 01)
-
-    // method for today's date
-    todayDate() { // dynamic
-        println("Today's date: ${dateNow}")
-        println("Today is: ${weekday}")
-        println("The month is: ${monthName}")
-        println("The day of the month is: ${monthDay}")
-        println("The year is: ${year}")
-        println("Today is ${weekday}, ${monthName} ${monthDay}, ${year}")
+        println("${buildPrefix}${lastDayOfSprint}${buildSuffix}")
+        return "${buildPrefix}${lastDayOfSprint}${buildSuffix}".toString()
     }
-
-    // method for sprint date
-    sprintDate() {
-        println("Sprint's end date: ${sprintEndDate}")
-        println("Date before the end of the sprint: ${beforeSprintEndDate}")
-        println("Date after the end of the sprint: ${afterSprintEndDate}")
-
-        // This method cannot be run on Jenkins. May need to be more specific.
-        def daysRemaining = sprintEndDate - dateNow
-        println("Days remaining until end of sprint: ${daysRemaining}")
-    }
-
-}
-
-// New instance of Sprint
-Sprint = s
-// Calling the new instances
-s.todayDate()
-s.sprintDate()
 // end of script
                 }
                 
