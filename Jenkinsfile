@@ -35,25 +35,31 @@ pipeline {
         stage('checkout') { steps { checkout scm } }
 
         stage('archive'){
+            steps{
+
+                script{
+
 
  
 
-            def archive_file = "${sprintBuildId()}"            // Don't put code here.  Put code down below.
+                    def archive_file = "${sprintBuildId()}"            // Don't put code here.  Put code down below.
+
+        
+                    // Following is commented out, but is the code that will be used.  left for reference.
+
+                    // s3Upload(bucket: 'leaf-pipeline', file: "fort_report/leaf.pdf", path: "fortify/reports/${archive_file}.pdf")
+                    // s3Upload(bucket: 'leaf-pipeline', file: "fort_report/leaf_merged.fpr", path: "fortify/reports/${archive_file}.fpr")
+        
+
+
+
+                    println("Renaming artifact to ${archive_file}.pdf")
+
+                }
+            }
 
  
-            // Following is commented out, but is the code that will be used.  left for reference.
-
-            // s3Upload(bucket: 'leaf-pipeline', file: "fort_report/leaf.pdf", path: "fortify/reports/${archive_file}.pdf")
-            // s3Upload(bucket: 'leaf-pipeline', file: "fort_report/leaf_merged.fpr", path: "fortify/reports/${archive_file}.fpr")
- 
-
-
-
-           println("Renaming artifact to ${archive_file}.pdf")
-      }
-
- 
-
+        }
     }
 }
 
