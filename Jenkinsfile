@@ -65,7 +65,7 @@ String sprintBuildId() {
     //class SprintBuildIdentifierSpec extends Specification {
 
 
-    static def SprintBuildIdentifier(ofDate = LocalDate.now())
+    def SprintBuildIdentifier(ofDate = LocalDate.now())
     {
         //println("*** START ***")
         def buildPrefix = "BLD"
