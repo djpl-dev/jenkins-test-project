@@ -62,7 +62,7 @@ pipeline {
 String sprintBuildId() { 
     //return "test"  // put code here
 
-    class SprintBuildIdentifierSpec extends Specification {
+    //class SprintBuildIdentifierSpec extends Specification {
 
 
     static def SprintBuildIdentifier(ofDate = LocalDate.now())
