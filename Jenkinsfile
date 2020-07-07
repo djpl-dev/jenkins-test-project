@@ -59,14 +59,14 @@ pipeline {
 
  
 
-String sprintBuildId() { 
+String sprintBuildId(ofDate = LocalDate.now()) { 
     //return "test"  // put code here
 
     //class SprintBuildIdentifierSpec extends Specification {
 
 
-    def SprintBuildIdentifier(ofDate = LocalDate.now())
-    {
+    //def SprintBuildIdentifier(ofDate = LocalDate.now())
+    //{
         //println("*** START ***")
         def buildPrefix = "BLD"
         def buildSuffix = "XX"
@@ -109,5 +109,5 @@ String sprintBuildId() {
 
     }
 
-}    
+//}    
 //}
