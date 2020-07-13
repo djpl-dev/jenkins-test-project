@@ -76,7 +76,21 @@ String sprintBuildId(ofDate = LocalDate.now()) {
         //println("*** START ***")
         def buildPrefix = "BLD"
         def buildSuffix = "XX"
+	def scriptApproval = org.jenkinsci.plugins.scriptsecurity.scripts.ScriptApproval.get()
 
+	String[] signs = [
+		"method java.time.temporal.Temporal plus long java.time.temporal.TemporalUnit",
+		"method java.time.temporal.Temporal with java.time.temporal.TemporalAdjuster",
+		"method java.time.temporal.TemporalAccessor get java.time.temporal.TemporalField",
+		"staticField java.time.temporal.ChronoUnit DAYS",
+		"staticField java.time.temporal.IsoFields WEEK_OF_WEEK_BASED_YEAR"
+    	]
+
+	for( String sign : signs ) {
+	    	scriptApproval.approveSignature(sign)
+	}
+
+scriptApproval.save()
         // Captures week number of the year
         int weekOfYear = ofDate.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR)
         // last day of sprint are always on Tuesdays
