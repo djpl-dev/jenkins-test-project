@@ -14,7 +14,7 @@ import java.time.temporal.IsoFields
 
 // Add import statements needed  
 
-def scriptApproval = org.jenkinsci.plugins.scriptsecurity.scripts.ScriptApproval.get()
+def scriptApproval = org.jenkinsci.plugins.scriptsecurity.scripts.ScriptApproval
 
 String[] signs = [
     "staticMethod org.jenkinsci.plugins.scriptsecurity.scripts.ScriptApproval get",
