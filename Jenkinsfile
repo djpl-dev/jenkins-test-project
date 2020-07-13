@@ -17,6 +17,7 @@ import java.time.temporal.IsoFields
 def scriptApproval = org.jenkinsci.plugins.scriptsecurity.scripts.ScriptApproval.get()
 
 String[] signs = [
+    "staticMethod org.jenkinsci.plugins.scriptsecurity.scripts.ScriptApproval get",
     "method java.time.temporal.Temporal plus long java.time.temporal.TemporalUnit",
     "method java.time.temporal.Temporal with java.time.temporal.TemporalAdjuster",
     "method java.time.temporal.TemporalAccessor get java.time.temporal.TemporalField",
