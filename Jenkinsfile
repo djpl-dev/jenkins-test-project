@@ -1,45 +1,89 @@
-import spock.lang.Specification
-import spock.lang.Unroll
+//import spock.lang.Specification
+//import spock.lang.Unroll
 
 import java.time.*
 import java.time.temporal.ChronoField
 import java.time.temporal.ChronoUnit
 import java.time.temporal.IsoFields
 
-import static org.hamcrest.Matchers.*
-import static org.hamcrest.MatcherAssert.assertThat
-import static org.hamcrest.Matchers.equalTo
+//import static org.hamcrest.Matchers.*
+//import static org.hamcrest.MatcherAssert.assertThat
+//import static org.hamcrest.Matchers.equalTo
+
+/* vim: set ts=4 sw=4 tw=0 et : */
+
+// Add import statements needed  
+
+
 
 pipeline {
     agent any
+
+    options {
+        buildDiscarder(logRotator(numToKeepStr:'5'))
+        disableConcurrentBuilds()
+    }
+
+
     environment {
         PROJECT = "leaf"
     }
 
+ // ...
+ // removed code
+
     stages {
-        stage('checkout') { 
-            steps {
-                checkout scm 
-            } 
+        stage('checkout') { steps { checkout scm } }
+
+        stage('archive'){
+            steps{
+
+                script{
+
+
+ 
+
+                    def archive_file = "${sprintBuildId()}"            // Don't put code here.  Put code down below.
+
+        
+                    // Following is commented out, but is the code that will be used.  left for reference.
+
+                    // s3Upload(bucket: 'leaf-pipeline', file: "fort_report/leaf.pdf", path: "fortify/reports/${archive_file}.pdf")
+                    // s3Upload(bucket: 'leaf-pipeline', file: "fort_report/leaf_merged.fpr", path: "fortify/reports/${archive_file}.fpr")
+        
+
+
+
+                    println("Renaming artifact to ${archive_file}.pdf")
+
+                }
+            }
+
+ 
         }
-        stage('test') {
-            steps {
-                //DisplayName()
-                script {
-                    println("Hello world!")
-			        println "Branch name: ${BRANCH_NAME}"
-                    println "This is build #${BUILD_NUMBER}"
-                    println "URL for Jenkins: ${JENKINS_URL}"
-                    //println "URL for this Job: ${JOB_URL}"
-		
-		// Sprint Script:
+    }
+}
+
+ 
+
+String sprintBuildId(ofDate = LocalDate.now()) { 
+    //return "test"  // put code here
+
+    //class SprintBuildIdentifierSpec extends Specification {
+
+
+    //def SprintBuildIdentifier(ofDate = LocalDate.now())
+    //{
+        //println("*** START ***")
         def buildPrefix = "BLD"
         def buildSuffix = "XX"
 
         // Captures week number of the year
         int weekOfYear = ofDate.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR)
         // last day of sprint are always on Tuesdays
-        def lastDayOfSprint = ofDate.with(DayOfWeek.TUESDAY)
+        def lastDayOfSprint = ofDate.with(DayOfWeek.TUESDAY) // LOOK AT
+
+        //int sprintWeek = weekOfYear as int
 
         // if week is ODD
         if(weekOfYear % 2 != 0) {
@@ -53,42 +97,24 @@ pipeline {
                 // last day of sprint is in the week of the date
                 lastDayOfSprint = ofDate.with(DayOfWeek.TUESDAY)
             }
+            //println("Week is odd ${weekOfYear}")
+            //sprintWeek = sprintWeek + 2
         }
         // if week is EVEN
         else { // if(weekOfYear % 2 == 0)
             // adds a week to the even week to land the last sprint day on a tuesday in the following odd week
             lastDayOfSprint = lastDayOfSprint.plus(7, ChronoUnit.DAYS).with(DayOfWeek.TUESDAY)
+            //println("Week is even ${weekOfYear}")
+            //sprintWeek = sprintWeek + 1
         }
-
+        //println("Today's date: ${ofDate}. Week of Today: ${weekOfYear}")
+        //println("Date of Last Sprint day: ${lastDayOfSprint}. Week of Last Sprint day: ${sprintWeek}")
         println("${buildPrefix}${lastDayOfSprint}${buildSuffix}")
-        return "${buildPrefix}${lastDayOfSprint}${buildSuffix}".toString()
-    }
-// end of script
-                }
-                
-            }
-        }
-	stage('Example Deploy') {
-            when {
-                branch 'production'
-                
-            }
-            steps {
-                echo 'Deploying'
-            }
-        }
-   }
 
-/*
-// simple groovy method
-    class Example {
-        static def DisplayName() {
-            println("This is how methods work in groovy");
-            println("This is an example of a simple method");
-        } 
-            
-        static void main(String[] args) {
-            DisplayName();
-        } 
-    } */
-    
+        return "${buildPrefix}${lastDayOfSprint}${buildSuffix}".toString()
+
+
+    }
+
+//}    
+//}
